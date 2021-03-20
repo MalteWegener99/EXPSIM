@@ -1,4 +1,5 @@
-function BALcor = apply_BC(BAL)
+function BALcor = apply_BC(BAL_)
+    BAL = BAL_;
     Dp = 0.2032; % Prop disc diameter
     Sp = pi*Dp^2/4; % Prop disc area
     load('para/BCpara.mat');
