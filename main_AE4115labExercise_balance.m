@@ -10,7 +10,6 @@ clc
 
 %% Inputs
 % enter group number 
-groupNo = 1; 
 groupNo = 23; 
 
 % define root path on disk where data is stored
