@@ -3,7 +3,7 @@ function BAL2 = CalcThrustCoeff(BAL,D)
 %   Detailed explanation goes here
 BAL2 = BAL;
 drag20 = griddata(round(BAL.windOn.polar2.AoA*20)/20,round(BAL.windOn.polar2.AoS*20)/20,BAL.windOn.polar2.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
-drag40 = griddata(round(BAL.windOn.polar11.AoA*20)/20,round(BAL.windOn.polar11.AoS*20)/20,BAL.windOn.polar11.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
+drag40 = griddata(round(BAL.windOn.polar11.AoA*20)/20,round(BAL.windOn.polar11.AoS*20)/20,BAL.windOn.polar1.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
 polars = fieldnames(BAL.windOn);
 for i=1:length(polars)
     if length(BAL.windOn.(polars{i}).V) < 14

@@ -100,7 +100,7 @@ BAL.windOn.polar9.dr = 10;
 BAL = CalcThrustCoeff(BAL,D);
 cnbeta = getCnbeta(BAL);
 cncp = getCnCp(BAL);
-filter = (cnbeta.V == 20);
-scatter(cnbeta.J(filter),cnbeta.val(filter))
+filter = (BAL.windOn.polar4.AoS == 2);
+scatter(BAL.windOn.polar4.CL(filter).^2,BAL.windOn.polar4.CD(filter))
 
 
