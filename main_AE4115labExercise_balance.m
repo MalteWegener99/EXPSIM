@@ -99,16 +99,19 @@ BAL.windOn.polar8.dr = 10;
 BAL.windOn.polar9.dr = 10;
 % Correct for Drag
 BAL = CalcThrustCoeff(BAL,D);
+<<<<<<< Updated upstream
 cnbeta = getCnbeta(BAL);
 cncp = getCnCp(BAL);
 filter = (BAL.windOn.polar4.AoS == 2);
 scatter(BAL.windOn.polar4.CL(filter).^2,BAL.windOn.polar4.CD(filter))
 
+=======
 % cnbeta = getCnbeta(BAL);
 % cncp = getCnCp(BAL);
 % filter = (cnbeta.V == 20);
 % scatter(cnbeta.J(filter),cnbeta.val(filter))
 BAL = apply_BC(BAL);
+>>>>>>> Stashed changes
 
 %% CD-CL2 
 % polarName = 'polar4';
