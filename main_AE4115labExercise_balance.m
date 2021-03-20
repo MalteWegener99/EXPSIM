@@ -11,6 +11,7 @@ clc
 %% Inputs
 % enter group number 
 groupNo = 1; 
+groupNo = 23; 
 
 % define root path on disk where data is stored
 diskPath      = './group23/group23/BAL';
@@ -103,4 +104,42 @@ cncp = getCnCp(BAL);
 filter = (BAL.windOn.polar4.AoS == 2);
 scatter(BAL.windOn.polar4.CL(filter).^2,BAL.windOn.polar4.CD(filter))
 
+% cnbeta = getCnbeta(BAL);
+% cncp = getCnCp(BAL);
+% filter = (cnbeta.V == 20);
+% scatter(cnbeta.J(filter),cnbeta.val(filter))
+BAL = apply_BC(BAL);
 
+%% CD-CL2 
+% polarName = 'polar4';
+% CLdata = BAL.windOn.(polarName).CL;
+% CDdata = BAL.windOn.(polarName).CD;
+% beta   = 0;
+% CL_    = [];
+% CD_    = [];
+% alpha  = [];
+% Length = size(CLdata,1);
+% p = fieldnames(BAL.windOn);
+% for j = 1:length(p)
+%     polarName = p{j}
+%      if length(BAL.windOn.(p{j}).CL) < 14
+%             continue
+%     end
+% %     BAL.windOn.(p{i})
+%     for i=1:Length
+%         if abs(BAL.windOn.(polarName).AoS(i) - beta) < 0.1
+%             CL_(end+1)   = CLdata(i);
+%             CD_(end+1)   = CDdata(i);
+%             alpha(end+1) = BAL.windOn.(polarName).AoA(i);
+%         end
+%     end
+% end
+% CL2 = CL_.*CL_;
+% CL2 = sort(CL2)
+% CD_ = sort(CD_)
+% figure(1)
+% scatter(CL2,CD_)
+% grid on
+% xlabel('C_L^2', 'FontSize', 16);
+% ylabel('C_D', 'FontSize', 16);
+% CDi = (max(CD_) - min(CD_)) / (max(CL2) - min(CL2)) 
