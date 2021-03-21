@@ -26,7 +26,8 @@ diskPath      = './group23/group23/BAL';
 % structure and these must start with a letter, so you will need to replace
 % the first character with a letter. For the + and - signs this has already
 % been implemented.
-fn_BAL = {'raw_polar4.txt',...
+fn_BAL = {'raw_polar1.txt',...
+          'raw_polar4.txt',...
           'raw_polar5.txt',...
           'raw_polar6.txt',...
           'raw_polar7.txt',...
@@ -40,7 +41,8 @@ fn_BAL = {'raw_polar4.txt',...
 % per raw data files. In case multiple zero-measurements are available for
 % a datapoint, then add a structure with the filenames of the zero 
 % measurements at the index of that datapoint.
-fn0 = {'zer_20210226_120031.txt',...
+fn0 = {'zer_20210226_135105.txt',...
+       'zer_20210226_120031.txt',...
        'zer_20210226_120031.txt',...
        'zer_20210226_120031.txt',...
        'zer_20210226_120031.txt',...
@@ -99,47 +101,10 @@ BAL.windOn.polar9.dr = 10;
 % Correct for Drag
 BAL = CalcThrustCoeff(BAL,D);
 
-cnbeta = getCnbeta(BAL);
-cncp = getCnCp(BAL);
-filter = (BAL.windOn.polar4.AoS == 2);
-scatter(BAL.windOn.polar4.CL(filter).^2,BAL.windOn.polar4.CD(filter))
 
-% cnbeta = getCnbeta(BAL);
-% cncp = getCnCp(BAL);
-% filter = (cnbeta.V == 20);
-% scatter(cnbeta.J(filter),cnbeta.val(filter))
 BAL = apply_BC(BAL);
 
-%% CD-CL2 
-% polarName = 'polar4';
-% CLdata = BAL.windOn.(polarName).CL;
-% CDdata = BAL.windOn.(polarName).CD;
-% beta   = 0;
-% CL_    = [];
-% CD_    = [];
-% alpha  = [];
-% Length = size(CLdata,1);
-% p = fieldnames(BAL.windOn);
-% for j = 1:length(p)
-%     polarName = p{j}
-%      if length(BAL.windOn.(p{j}).CL) < 14
-%             continue
-%     end
-% %     BAL.windOn.(p{i})
-%     for i=1:Length
-%         if abs(BAL.windOn.(polarName).AoS(i) - beta) < 0.1
-%             CL_(end+1)   = CLdata(i);
-%             CD_(end+1)   = CDdata(i);
-%             alpha(end+1) = BAL.windOn.(polarName).AoA(i);
-%         end
-%     end
-% end
-% CL2 = CL_.*CL_;
-% CL2 = sort(CL2)
-% CD_ = sort(CD_)
-% figure(1)
-% scatter(CL2,CD_)
-% grid on
-% xlabel('C_L^2', 'FontSize', 16);
-% ylabel('C_D', 'FontSize', 16);
-% CDi = (max(CD_) - min(CD_)) / (max(CL2) - min(CL2)) 
+cnbeta = getCnbeta(BAL);
+cncp = getCnCp(BAL);
+filter = (cnbeta.V == 20);
+scatter(cnbeta.J(filter),cnbeta.val(filter))
