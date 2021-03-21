@@ -12,14 +12,14 @@ function BALcor = apply_BC(BAL_)
     CD0short    = [];
     epswb0short = [];
     for k=Bordershort
-        CD0short(end+1)    = CD0(k);
-        epswb0short(end+1) = eps_wb_0(k);
+        CD0short(end+1,1)    = CD0(k);
+        epswb0short(end+1,1) = eps_wb_0(k);
     end
     CD0long    = [];
     epswb0long = [];
     for k=Borderlong
-        CD0long(end+1)    = CD0(k);
-        epswb0long(end+1) = eps_wb_0(k);
+        CD0long(end+1,1)    = CD0(k);
+        epswb0long(end+1,1) = eps_wb_0(k);
     end
     
     Aordershort = [3 2 4 1 3 5 2 4 3];
@@ -31,10 +31,10 @@ function BALcor = apply_BC(BAL_)
     delta_CMqctshort = [];
     for k=Aordershort
 %         CLWshort(end+1)         = CLW(k); % not used
-        delta_alfashort(end+1)  = delta_alfa(k);
-        delta_CDWshort(end+1)   = delta_CDW(k);
-        delta_CM_qcshort(end+1) = delta_CM_qc(k);
-        delta_CMqctshort(end+1) = delta_CMqct(k);
+        delta_alfashort(end+1,1)  = delta_alfa(k);
+        delta_CDWshort(end+1,1)   = delta_CDW(k);
+        delta_CM_qcshort(end+1,1) = delta_CM_qc(k);
+        delta_CMqctshort(end+1,1) = delta_CMqct(k);
     end
     CLWlong = [];
     delta_alfalong = [];
@@ -44,10 +44,10 @@ function BALcor = apply_BC(BAL_)
     
     for k=Aorderlong
 %         CLWlong(end+1)         = CLW(k);
-        delta_alfalong(end+1)  = delta_alfa(k);
-        delta_CDWlong(end+1)   = delta_CDW(k);
-        delta_CM_qclong(end+1) = delta_CM_qc(k);
-        delta_CMqctlong(end+1) = delta_CMqct(k);
+        delta_alfalong(end+1,1)  = delta_alfa(k);
+        delta_CDWlong(end+1,1)   = delta_CDW(k);
+        delta_CM_qclong(end+1,1) = delta_CM_qc(k);
+        delta_CMqctlong(end+1,1) = delta_CMqct(k);
     end
     
     p = fieldnames(BAL.windOn);
@@ -64,7 +64,7 @@ function BALcor = apply_BC(BAL_)
            del_alfa = delta_alfashort;
            
        else
-           eps_ss = -1*CT./2/sqrt(1+2.*CT); % Prop on
+           eps_ss = -1*CT./2./sqrt(1+2.*CT); % Prop on
            cd0 = CD0long;
            epswb0 = epswb0long;
            clw = CLWlong;
