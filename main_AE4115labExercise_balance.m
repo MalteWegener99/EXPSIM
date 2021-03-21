@@ -105,6 +105,3 @@ BAL = CalcThrustCoeff(BAL,D);
 BAL = apply_BC(BAL);
 
 cnbeta = getCnbeta(BAL);
-cncp = getCnCp(BAL);
-filter = (cnbeta.V == 20);
-scatter(cnbeta.J(filter),cnbeta.val(filter))

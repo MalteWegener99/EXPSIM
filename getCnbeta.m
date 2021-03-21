@@ -10,30 +10,23 @@ function Cnbeta = getCnbeta(BAL)
     end
     k = 1;
     h = 0.2;
+    data = {};
     % Find Cnbeta 
     for i=1:length(polars)
-        interp = scatteredInterpolant(BAL.windOn.(polars{i}).AoA,BAL.windOn.(polars{i}).AoS,BAL.windOn.(polars{i}).J_M1,BAL.windOn.(polars{i}).CYaw);
-        beta = 0:h:5;
-        alphas = [-1,0,5];
-        cps = [1.68,1.8,1.92];
-        on = ones(1,length(beta));
-        dr = BAL.windOn.(polars{i}).dr;
-        if mean(BAL.windOn.(polars{i}).V) < 30
-            V = 20;
-        else
-            V = 40;
-        end
-        
-        for a=1:length(alphas)
-            for p=1:length(cps)
-                Cnbeta.val(k) = mean(gradient(interp(on*alphas(a),beta,on*cps(p)),h));
-                Cnbeta.J(k) = cps(p);
-                Cnbeta.alpha(k) = alphas(a);
-                Cnbeta.V(k) = V;
-                Cnbeta.dr(k) = dr;
-                k= k + 1;
-            end
+        for j=1:15
+            data.Cn(k,1) = BAL.windOn.(polars{i}).CYaw(j)';
+            data.J(k,1) = round(BAL.windOn.(polars{i}).J_M1(j)*10)/10;
+            data.a(k,1) = round(BAL.windOn.(polars{i}).AoA(j));
+            data.b(k,1) = round(BAL.windOn.(polars{i}).AoS(j));
+            data.V(k,1) = round(BAL.windOn.(polars{i}).V(j)/10)*10;
+            data.dr(k,1) = BAL.windOn.(polars{i}).dr;
+            data.CT(k,1) = BAL.windOn.(polars{i}).CTh(j);
+            k = k+1;
         end
     end
+    filter = (data.dr == 0) & (data.V == 20) & data.J==1.8;
+    figure(2)
+    scatter(data.b(filter),data.Cn(filter))
+    writetable(struct2table(data), 'datapoints.csv')
 end
 
