@@ -14,7 +14,8 @@ function Cnbeta = getCnbeta(BAL)
     % Find Cnbeta 
     for i=1:length(polars)
         for j=1:15
-            data.Cn(k,1) = BAL.windOn.(polars{i}).CYaw(j)';
+            data.Cn(k,1) = BAL.windOn.(polars{i}).CMy(j)';
+            data.Cp(k,1) = BAL.windOn.(polars{i}).CMr(j)';
             data.J(k,1) = round(BAL.windOn.(polars{i}).J_M1(j)*10)/10;
             data.a(k,1) = round(BAL.windOn.(polars{i}).AoA(j));
             data.b(k,1) = round(BAL.windOn.(polars{i}).AoS(j));
