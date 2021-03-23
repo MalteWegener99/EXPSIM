@@ -15,7 +15,9 @@ al = np.array(data["a"])
 bt = np.array(data["b"])
 
 filt = (V == 20)
-plt.scatter(J[filt],Ct[filt],marker="v",c=dr[filt])
+plt.scatter(J[filt],Ct[filt],marker="v")
+filt = (V == 40)
+plt.scatter(J[filt],Ct[filt],marker="x")
 plt.show()
 
 def derivatives_20_Cn():
@@ -50,7 +52,7 @@ def derivatives_20_Cp():
     print("Calculating Roll stability derivatives from",sum(filt), "Datapoints")
     indep = np.array([al,bt,dr,Ct])
     a = lr.LinearRegression(fit_intercept=True)
-    a.fit((indep.T)[filt,:], (data["Cn"])[filt])
+    a.fit((indep.T)[filt,:], (data["Cp"])[filt])
     print("Score of fit:",a.score((indep.T)[filt,:], (data["Cp"])[filt]))
     print("Cp_beta:",a.coef_[1])
     print("Cp_alpha:",a.coef_[0])
@@ -63,7 +65,7 @@ def derivatives_40_Cp():
     print("Calculating Roll stability derivatives from",sum(filt), "Datapoints")
     indep = np.array([al,bt,dr,Ct])
     a = lr.LinearRegression(fit_intercept=True)
-    a.fit((indep.T)[filt,:], (data["Cn"])[filt])
+    a.fit((indep.T)[filt,:], (data["Cp"])[filt])
     print("Score of fit:",a.score((indep.T)[filt,:], (data["Cp"])[filt]))
     print("Cp_beta:",a.coef_[1])
     print("Cp_alpha:",a.coef_[0])

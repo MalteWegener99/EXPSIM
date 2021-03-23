@@ -99,9 +99,11 @@ BAL.windOn.polar7.dr = 5;
 BAL.windOn.polar8.dr = 10;
 BAL.windOn.polar9.dr = 10;
 % Correct for Drag
-BAL = CalcThrustCoeff(BAL,D);
+for i=1:10
+    BAL = CalcThrustCoeff(BAL,D);
 
 
-BAL = apply_BC(BAL);
+    BAL = apply_BC(BAL);
+end
 
 cnbeta = getCnbeta(BAL);

@@ -2,16 +2,17 @@ function BAL2 = CalcThrustCoeff(BAL,D)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 BAL2 = BAL;
-drag20_0 = griddata(round(BAL.windOn.polar2.AoA*20)/20,round(BAL.windOn.polar2.AoS*20)/20,BAL.windOn.polar2.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
-drag40_0 = griddata(round(BAL.windOn.polar1.AoA*20)/20,round(BAL.windOn.polar1.AoS*20)/20,BAL.windOn.polar1.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
-drag20_10 = griddata(round(BAL.windOn.polar11.AoA*20)/20,round(BAL.windOn.polar11.AoS*20)/20,BAL.windOn.polar11.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
-drag40_10 = griddata(round(BAL.windOn.polar10.AoA*20)/20,round(BAL.windOn.polar10.AoS*20)/20,BAL.windOn.polar10.CD,round(BAL.windOn.polar4.AoA*20)/20,round(BAL.windOn.polar4.AoS*20)/20);
+
 polars = fieldnames(BAL.windOn);
 for i=1:length(polars)
     if length(BAL.windOn.(polars{i}).V) < 14
         continue
     end
     display(polars{i})
+    drag20_0 = griddata(round(BAL.windOn.polar2.AoA*20)/20,round(BAL.windOn.polar2.AoS*20)/20,BAL.windOn.polar2.CD,round(BAL.windOn.(polars{i}).AoA*20)/20,round(BAL.windOn.(polars{i}).AoS*20)/20);
+    drag40_0 = griddata(round(BAL.windOn.polar1.AoA*20)/20,round(BAL.windOn.polar1.AoS*20)/20,BAL.windOn.polar1.CD,round(BAL.windOn.(polars{i}).AoA*20)/20,round(BAL.windOn.(polars{i}).AoS*20)/20);
+    drag20_10 = griddata(round(BAL.windOn.polar11.AoA*20)/20,round(BAL.windOn.polar11.AoS*20)/20,BAL.windOn.polar11.CD,round(BAL.windOn.(polars{i}).AoA*20)/20,round(BAL.windOn.(polars{i}).AoS*20)/20);
+    drag40_10 = griddata(round(BAL.windOn.polar10.AoA*20)/20,round(BAL.windOn.polar10.AoS*20)/20,BAL.windOn.polar10.CD,round(BAL.windOn.(polars{i}).AoA*20)/20,round(BAL.windOn.(polars{i}).AoS*20)/20);
     if mean(BAL.windOn.(polars{i}).V) < 30
         if BAL.windOn.(polars{i}).dr == 0
             drag = drag20_0;
