@@ -26,8 +26,6 @@ function Cnbeta = getCnbeta(BAL)
         end
     end
     filter = (data.dr == 0) & (data.V == 20) & data.J==1.8;
-    figure(2)
-    scatter(data.b(filter),data.Cn(filter))
     writetable(struct2table(data), 'datapoints.csv')
 end
 
