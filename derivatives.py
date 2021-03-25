@@ -9,11 +9,12 @@ import matplotlib.pyplot as plt
 #Load the fucktwat data
 data = pd.read_csv("datapoints.csv")
 V = np.array(data["V"])
-dr = np.array(data["dr"],dtype=np.float64)
+dr = -1*np.array(data["dr"],dtype=np.float64)
 Ct = np.array(data["CT"])
 J = np.array(data["J"])
 al = np.array(data["a"])
 bt = np.array(data["b"])
+data["Cn"] = -data["Cn"]
 
 def derivatives_20_Cn():
     filt = (V == 20) & (bt<8) & (Ct > 0.02)
@@ -100,7 +101,7 @@ def show_nonlinearity_tobeta():
     plt.legend()
     plt.grid()
     plt.xlabel(r"$\beta$")
-    plt.ylabel("$C_P$")
+    plt.ylabel("$C_L$")
     plt.tight_layout()
     plt.savefig("Images/nonlinCpbeta")
 
@@ -133,7 +134,7 @@ def show_nonlinearity_toCt():
     plt.legend()
     plt.grid()
     plt.xlabel("$C_T$")
-    plt.ylabel("$C_P$")
+    plt.ylabel("$C_L$")
     plt.tight_layout()
     plt.savefig("Images/nonlinCpCt")
 
@@ -166,7 +167,7 @@ def show_nonlinearity_toal():
     plt.legend()
     plt.grid()
     plt.xlabel(r"$\alpha$")
-    plt.ylabel("$C_P$")
+    plt.ylabel("$C_L$")
     plt.tight_layout()
     plt.savefig("Images/nonlinCpal")
 
@@ -176,7 +177,7 @@ def show_CT_J():
     filt40 = (V == 40)
     plt.clf()
     plt.scatter(J[filt20],Ct[filt20],marker="o",edgecolors="k",label=r"V=20",facecolors='none')
-    plt.scatter(J[filt40],Ct[filt40],marker="o",edgecolors="gray",label=r"V=400",facecolors='none')
+    plt.scatter(J[filt40],Ct[filt40],marker="o",edgecolors="gray",label=r"V=40",facecolors='none')
     plt.legend()
     plt.grid()
     plt.xlabel("$J$")
@@ -187,9 +188,30 @@ def show_CT_J():
 def plot_fit_Cn():
     alpha = [2,5]
     drs = [0,5,10]
+    C = 0.15
     betas = np.linspace(0,10)
+    plt.clf()
     for a, d in itertools.product(alpha,drs):
-        pass
+        aa = np.full_like(betas,np.radians(a))
+        dd = np.full_like(betas,np.radians(a))
+        cc = np.full_like(betas,C)
+        m = np.array([aa,np.radians(betas),dd,cc])
+        plt.plot(betas, Cn2.predict(m.T), "--k")
+        plt.plot(betas, Cn4.predict(m.T), "--", c="gray")
+
+    filt20 = (V == 20)
+    filt40 = (V == 40)
+    filta2 = (al == 2)
+    filta5 = (al == 5)
+
+    #Show for Cn
+    plt.scatter(bt[filt20&filta2],data["Cn"][filt20&filta2],marker="o",edgecolors="k",label=r"V=20, $\alpha=2$",facecolors='none')
+    plt.scatter(bt[filt20&filta5],data["Cn"][filt20&filta5],marker="s",edgecolors="k",label=r"V=20, $\alpha=5$",facecolors='none')
+
+    plt.scatter(bt[filt40&filta2],data["Cn"][filt40&filta2],marker="v",edgecolors="gray",label=r"V=40, $\alpha=2$",facecolors='none')
+    plt.scatter(bt[filt40&filta5],data["Cn"][filt40&filta5],marker="^",edgecolors="gray",label=r"V=40, $\alpha=5$",facecolors='none')
+
+    plt.show()
 
 def make_tables(C2, C4):
     de = [r"\alpha",r"\beta",r"\delta_r",r"C_T"]
@@ -213,6 +235,8 @@ show_CT_J()
 
 make_tables(Cn2,Cn4)
 make_tables(Cp2,Cp4)
+
+# plot_fit_Cn()
 
 
 exit()
