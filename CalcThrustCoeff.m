@@ -24,7 +24,7 @@ for i=1:length(polars)
             error("Fuck 20")
         end
         tmp = -(BAL2.windOn.(polars{i}).CD-drag).*BAL2.windOn.(polars{i}).q.*BAL2.windOn.(polars{i}).S;
-        BAL2.windOn.(polars{i}).CTh = tmp./(BAL2.windOn.(polars{i}).rpsM1).^2./BAL2.windOn.(polars{i}).rho./(D^4);
+        BAL2.windOn.(polars{i}).CTh = tmp./((BAL2.windOn.(polars{i}).rpsM1).^2)./BAL2.windOn.(polars{i}).rho./(D^4);
         BAL2.windOn.(polars{i}).CD = drag;
         BAL2.windOn.(polars{i}).CP = BAL2.windOn.(polars{i}).CTh.*BAL2.windOn.(polars{i}).V./D./BAL2.windOn.(polars{i}).rpsM1;
     elseif mean(BAL.windOn.(polars{i}).V) > 30

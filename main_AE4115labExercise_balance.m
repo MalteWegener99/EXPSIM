@@ -98,6 +98,11 @@ BAL.windOn.polar6.dr = 5;
 BAL.windOn.polar7.dr = 5;
 BAL.windOn.polar8.dr = 10;
 BAL.windOn.polar9.dr = 10;
+
+BAL.windOn.polar1.dr = 0;
+BAL.windOn.polar2.dr = 0;
+BAL.windOn.polar11.dr = 10;
+BAL.windOn.polar10.dr = 10;
 % Correct for Drag
 BAL = CalcThrustCoeff(BAL,D);
 
