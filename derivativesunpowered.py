@@ -16,7 +16,7 @@ J = np.array(data["J"])
 al = np.array(data["a"])
 ac = np.array(data["ac"])
 bt = np.array(data["b"])
-bc = np.array(data["bc"])
+bc = np.round(np.array(data["bc"]))
 data["Cn"] = -data["Cn"]
 
 
